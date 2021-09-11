@@ -1,0 +1,83 @@
+Given a method that returns the sum of two integers.
+
+Collect the two integers, read the value of the two integers. 
+Perform an addition calculation on the integers. 
+
+````````````````````````````````````````````````````````````````
+START
+
+# a method that returns the sum of two integers
+
+SET integers = 2
+
+SET integer 1
+SET integer 2
+
+READ result = integer 1 plus integer 2
+
+PRINT result
+
+END
+
+======================
+
+
+Given an array of strings. 
+
+Iterate through the array one by one
+ - save the first string to a different string value
+ - for each iteration , add a space after the word
+ - continue to process through the entire array
+ - if the array is empty complete the iteration
+
+After iterating, return the value of the saved string
+
+`````````````````````````````````````````````````````````
+
+START
+
+# a method that takes an array of strings, and returns a string that is all those strings concatenated together 
+
+SET array_of_strings
+SET empty_string_value
+
+WHILE array_of_strings is not empty
+  empty_string_value << current_index of array_of_strings
+  empty_string value = empty_string_value + " "(space)
+  
+  current_index = current_index + 1
+
+PRINT empty_string_value
+
+END
+
+=========================
+
+Given an array of integers.
+
+Create a new array
+
+Iterate through the array one by one
+  -Evaluate the first number, send it to new array
+  -After one number is evaluated skip the next number
+  -Evaluate the next number, send it to new array
+Repeat until end of array
+
+````````````````````````````````````````````````````````
+
+START 
+
+# a method that takes an array of integers, and returns a new array with every other element 
+
+SET array_of_integers
+SET empty_array
+
+WHILE array_of_integers 
+  SET empty_array << value at index in array_of_integers
+    index = index + 2
+
+PRINT empty_array
+
+END
+
+
