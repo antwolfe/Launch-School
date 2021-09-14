@@ -1,0 +1,66 @@
+
+# ask user for loan amount
+# ask user for APR 
+# ask user for loan duration
+
+# calculate monthly interest rate ( j in formula )
+# calcluate loan duration in months (n in formula)
+# monthly payment (m in formula)
+
+m = p * (j / (1 - (1 + j)**(-n)))
+
+# monthly payment = loan amount * (monthly interest rate / (1 -(1 + monthly interest rate)**(-loan duration in months)))
+
+# examples : $1000 at 10% APR for 1 year(s) = monthly interest rate, for 12 months, and a payment of $87.92 per month, with a total interest of $54.99
+ 
+
+
+
+
+START
+
+SET user_loan_amount = nil
+
+
+PRINT "welcome to loan calc message"
+
+ # START LOOP
+
+
+
+PRINT "please enter your loan amount"
+GET user loan amount
+SUBPROCESS "validate loan amount"
+SET user_loan_amount
+
+
+PRINT "please enter your APR"
+GET user APR
+SUBPROCESS "validate APR amount"
+SET apr_in_months = SUBPROCESS "user APR * 12
+
+
+PRINT "please enter your loan duration in months"
+GET user_loan_months
+SUBPROCESS "validate user_loan_months"
+
+monthly_payment = (READ user_loan_amount) * (READ apr_in_months)/ 1-(1 + apr_in_months)**(-READ user_loan_months)
+
+PRINT "<<--MSG your loan details..."
+
+
+PRINT "do you want to calculate again?"
+GET again_answer
+
+IF again_answer = yes
+  restart loop
+ELSE
+  break
+
+ # END LOOP
+
+PRINT "Goodbye message"
+
+
+END
+
