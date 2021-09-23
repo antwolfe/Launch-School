@@ -8,6 +8,10 @@ def valid_integer?(numstring)
   numstring.to_i.to_s == numstring && numstring > '0'
 end
 
+def valid_float?(numstring)
+  numstring.to_f.to_s == numstring && numstring > '0'
+end
+
 def apr_to_months(apr)
   (apr.to_f / 100) / 12
 end
@@ -16,8 +20,10 @@ def loan_years_to_months(years)
   years.to_f * 12
 end
 
-def valid_float?(numstring)
-  numstring.to_f.to_s == numstring && numstring > '0'
+def apr_zero?(apr)
+  if apr == '0'
+    apr
+  end
 end
 
 def clear_screen
@@ -44,8 +50,11 @@ loop do # Main Loop
   loop do
     prompt("Please enter your APR amount")
     user_apr_amount = gets.chomp
-    if valid_integer?(user_apr_amount) || valid_float?(user_apr_amount)
+    if valid_integer?(user_apr_amount) || valid_float?(user_apr_amount)                                                                                
       apr_in_months = apr_to_months(user_apr_amount)
+      break
+    elsif apr_zero?(user_apr_amount)
+      apr_in_months = '0'
       break
     else
       prompt("Please enter a valid APR \n Ex: 5 for 5% or 12.5 for 12.5%")
