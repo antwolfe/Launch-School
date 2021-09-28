@@ -1,0 +1,74 @@
+
+intro:
+    Welcome to Rock Paper Scissors Spock Lizard!
+
+     ~ Rock, Paper, Scissors game with a twist!
+  
+     ~ Type 'rules' for rules
+  
+     ~ Type 'start' to start the game
+
+rules:
+      << Choose a weapon from >> 
+
+  \* (R)ock (P)aper (Sc)issors (Sp)ock (L)izard
+
+  \* Don't pick S!
+
+  \* The computer will also randomly pick a weapon.
+
+  \* And you'll battle to the death!  
+
+
+ `` Scissors cuts Paper covers Rock crushes
+
+     Lizard poisons Spock smashes Scissors
+
+        decapitates Lizard eats Paper disproves
+
+           Spock vaporizes Rock crushes Scissors ``
+
+
+  \* There can only be one winner!
+
+  \* Just kidding, there can be a tie. :)
+
+  \* Winner gets 1 point.
+
+  \* Type 'score' to get the current score.
+
+gamemenu_invalid_entry:
+     Invalid entry. 
+
+     Please enter 'rules' for the list of rules.
+
+     Or enter 'start' to start a game. 
+
+choose_weapon:
+  "Please choose a weapon:"
+
+invalid_weapon:
+  This is an invalid weapon.
+
+game_menu:
+  What would you like to do next?
+
+  Type 'rules' for rules
+
+  Type 'start' for game
+
+  Type 'score' for score
+
+play_again_msg:
+  Would you like to play again?
+
+  Type 'y' or 'yes' to play again
+
+  Type 'n' or 'no' to exit game
+
+  Type 'score' to get your current score
+
+  Type 'intro' to reset score and go back to the beginning
+
+play_again_invalid:
+  This is an invalid input. Try again.

@@ -1,0 +1,27 @@
+
+With a set list of moves
+
+-Ask player if they want to read a list of rules.
+-Ask player for thier move choice.
+-Have robot move
+-Determine which move is the winner.
+-Add a point to the player that has the winning move. 
+
+-Loop above logic until player has reached a number of rounds.
+-Complete game 
+
+START
+
+PRINT welcome message
+SET read_rules?
+GET answer_read_rules
+IF read_rules
+  SUBPROCESS (print rules) 
+ELSE
+  SUBPROCESS (start_game)
+
+
+SUBPROCESS win?(player1, player2)
+  IF WINNING_MOVES[player1].include?(player2)
+end   
+
