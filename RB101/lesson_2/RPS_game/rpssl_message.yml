@@ -9,11 +9,11 @@ intro:
      ~ Type 'start' to start the game
 
 rules:
-      << Choose a weapon from >> 
+      << RULES >> 
 
-  \* (R)ock (P)aper (Sc)issors (Sp)ock (L)izard
-
-  \* Don't pick S!
+  \* Choose your number of rounds, or hit enter for default game length
+  
+  \* (R)ock (P)aper (Sc)issors (Sp)ock (L)izard  ((Don't pick S!))
 
   \* The computer will also randomly pick a weapon.
 
@@ -35,8 +35,6 @@ rules:
 
   \* Winner gets 1 point.
 
-  \* Type 'score' to get the current score.
-
 gamemenu_invalid_entry:
      Invalid entry. 
 
@@ -57,18 +55,15 @@ game_menu:
 
   Type 'start' for game
 
-  Type 'score' for score
-
 play_again_msg:
   Would you like to play again?
+
 
   Type 'y' or 'yes' to play again
 
   Type 'n' or 'no' to exit game
 
-  Type 'score' to get your current score
-
-  Type 'intro' to reset score and go back to the beginning
+  Type 'intro' to go back to the beginning
 
 play_again_invalid:
   This is an invalid input. Try again.
