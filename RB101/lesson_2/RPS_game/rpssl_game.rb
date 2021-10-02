@@ -34,7 +34,7 @@ def display_rules
 end
 
 def game_menu(answer)
-  while answer 
+  while answer
     case answer
     when 'rules'
       display_rules()
@@ -43,6 +43,7 @@ def game_menu(answer)
       answer = gets.chomp
     when 'start'
       game_loop
+      break
     else
       puts MSGS['gamemenu_invalid_entry']
       answer = gets.chomp
@@ -129,10 +130,11 @@ end
 
 def display_final_score_and_winner(scoreboard)
   display_score(scoreboard)
+  newline()
   if scoreboard[0] > scoreboard[1]
-    puts "YOU WON!"
+    prompt("YOU WON!")
   else
-    puts "COMPUTER WON!"
+    prompt("COMPUTER WON!")
   end
 end
 
@@ -140,8 +142,8 @@ def win_limit(scoreboard)
   scoreboard[0].eql?(3) || scoreboard[1].eql?(3)
 end
 
-# could also use method logic to do user controlled points? (see play_user_choice_wins)
-# which one is more pratical?
+# could also use method logic to do user controlled points?
+# (see play_user_choice_wins)
 
 # def user_pick_win_limit(scoreboard, points)
 #   scoreboard[0].eql?(points) || scoreboard[1].eql?(points)
@@ -175,9 +177,9 @@ def game_round(score)
   clear_screen()
 end
 
-def play_again?()
+def play_again?
   prompt(MSGS['play_again_msg'])
-  loop do 
+  loop do
     input = gets.chomp
     if input.eql?('y') || input.eql?('yes')
       return true
@@ -194,7 +196,6 @@ def enter_to_continue(input)
     input
   else
     input.clear
-    input
   end
 end
 
@@ -225,15 +226,13 @@ def game_loop
 
     if no_of_game_points == "limit"
       play_until_3_wins(scoreboard)
-    else 
+    else
       play_user_choice_wins(no_of_game_points, scoreboard)
     end
 
-   break unless play_again?()
-    
+    break unless play_again?()
   end
   prompt("Thanks for playing! Goodbye!")
-  
 end
 
 intro_and_menu()
