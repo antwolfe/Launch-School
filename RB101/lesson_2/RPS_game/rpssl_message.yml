@@ -11,7 +11,7 @@ intro:
 rules:
       << RULES >> 
 
-  \* Choose your number of rounds, or hit enter for default game length
+  \* Choose your number of points to win, or hit enter for default game length
   
   \* (R)ock (P)aper (Sc)issors (Sp)ock (L)izard  ((Don't pick S!))
 
@@ -55,6 +55,17 @@ game_menu:
 
   Type 'start' for game
 
+begin_game:
+  Beginning Game..
+
+
+  How many points do you want to play to?
+
+
+  Enter a number OR
+  
+  Pressing <ENTER> will default to winner will need 3 points to win
+
 play_again_msg:
   Would you like to play again?
 
@@ -63,7 +74,6 @@ play_again_msg:
 
   Type 'n' or 'no' to exit game
 
-  Type 'intro' to go back to the beginning
 
 play_again_invalid:
   This is an invalid input. Try again.

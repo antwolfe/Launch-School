@@ -34,24 +34,24 @@ def display_rules
 end
 
 def game_menu(answer)
-  case answer
-  when 'rules'
-    display_rules()
-    newline()
-    prompt(MSGS['game_menu'])
-    rules_answer = gets.chomp
-    game_menu(rules_answer)
-  when 'start'
-    game_loop
-  else
-    puts MSGS['gamemenu_invalid_entry']
-    game_menu(gets.chomp)
-    # repeat game intro? Bug here, anything but 'start' or 'rules' exits
+  while answer 
+    case answer
+    when 'rules'
+      display_rules()
+      newline()
+      prompt(MSGS['game_menu'])
+      answer = gets.chomp
+    when 'start'
+      game_loop
+    else
+      puts MSGS['gamemenu_invalid_entry']
+      answer = gets.chomp
+    end
   end
 end
 
 def intro_and_menu
-  display_intro
+  display_intro()
   game_menu(gets.chomp.downcase)
 end
 
@@ -87,7 +87,7 @@ def translate_weapon(abbr)
   when 'l' then "lizard"
   when 'sp' then "spock"
   when 's' then
-    puts "What a rebel! I'm picking for you!"
+    puts ">> What a rebel! I'm picking for you! <<"
     ['spock', 'scissors'].sample
   else
     valid_weapon?(abbr)
@@ -127,9 +127,25 @@ def display_score(scoreboard)
   MSG
 end
 
-def win_limit(scoreboard)
-  scoreboard[0] == 3 || scoreboard[1] == 3
+def display_final_score_and_winner(scoreboard)
+  display_score(scoreboard)
+  if scoreboard[0] > scoreboard[1]
+    puts "YOU WON!"
+  else
+    puts "COMPUTER WON!"
+  end
 end
+
+def win_limit(scoreboard)
+  scoreboard[0].eql?(3) || scoreboard[1].eql?(3)
+end
+
+# could also use method logic to do user controlled points? (see play_user_choice_wins)
+# which one is more pratical?
+
+# def user_pick_win_limit(scoreboard, points)
+#   scoreboard[0].eql?(points) || scoreboard[1].eql?(points)
+# end
 
 def valid_rounds?(no_of_round)
   if no_of_round == ""
@@ -152,38 +168,33 @@ def game_round(score)
   take_score(user_weapon, computer_weapon, score)
   display_results(user_weapon, computer_weapon)
   newline()
+  display_score(score)
+  newline()
   prompt("Press enter")
   enter_to_continue(gets.chomp)
   clear_screen()
 end
 
-def play_again?(input)
-  if input == 'y' || input == "yes"
-    true
-  elsif input == 'n' || input == "no"
-    false
-  elsif input == 'intro'
-    intro_and_menu()
-  else
-    prompt(MSGS['play_again_invalid'])
-    play_again?(gets.chomp)
-  end
-end
-
-def play_again_prompt
+def play_again?()
   prompt(MSGS['play_again_msg'])
-  if play_again?(gets.chomp) == true
-    game_loop
-  else
-    false
+  loop do 
+    input = gets.chomp
+    if input.eql?('y') || input.eql?('yes')
+      return true
+    elsif input.eql?('n') || input.eql?("no")
+      return false
+    else
+      prompt(MSGS['play_again_invalid'])
+    end
   end
 end
 
 def enter_to_continue(input)
-  if input == ""
+  if input.empty?
     input
   else
-    prompt("Please press enter")
+    input.clear
+    input
   end
 end
 
@@ -191,39 +202,38 @@ def play_until_3_wins(scoreboard)
   until win_limit(scoreboard)
     game_round(scoreboard)
   end
-  display_score(scoreboard)
+  display_final_score_and_winner(scoreboard)
   newline()
 end
 
-def play_user_choice_game_rounds(game_rounds, scoreboard)
-  while game_rounds > 0
+def play_user_choice_wins(points, scoreboard)
+  while !scoreboard.include?(points)
     game_round(scoreboard)
     clear_screen()
-    game_rounds -= 1
   end
-
-  display_score(scoreboard)
+  display_final_score_and_winner(scoreboard)
   newline()
 end
 
 def game_loop
-  clear_screen()
-  scoreboard = [0, 0]
-  puts "No. of rounds:"
-  rounds = gets.chomp
-  no_of_game_rounds = valid_rounds?(rounds)
-
   loop do
-    if no_of_game_rounds == "limit"
+    clear_screen()
+    scoreboard = [0, 0]
+    prompt(MSGS['begin_game'])
+    rounds = gets.chomp
+    no_of_game_points = valid_rounds?(rounds)
+
+    if no_of_game_points == "limit"
       play_until_3_wins(scoreboard)
-      break unless play_again_prompt()
+    else 
+      play_user_choice_wins(no_of_game_points, scoreboard)
     end
 
-    play_user_choice_game_rounds(no_of_game_rounds, scoreboard)
-    break unless play_again_prompt()
+   break unless play_again?()
+    
   end
-
   prompt("Thanks for playing! Goodbye!")
+  
 end
 
 intro_and_menu()
