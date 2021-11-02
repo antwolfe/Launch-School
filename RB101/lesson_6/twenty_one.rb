@@ -31,9 +31,6 @@ CARDS_HSH = {
 }
 # rubocop:enable Layout/HashAlignment
 
-YES_NO = ['y', 'yes', 'n', 'no']
-HIT_STAY = ['h', 'hit', 's', 'stay']
-
 def total(cards)
   sum = 0
 
@@ -59,15 +56,15 @@ def user_turn(players_hand)
   answer = nil
 
   loop do
-    puts "Your total is: #{total(players_hand)}"
+    display_hand_and_total("Player", players_hand)
     break if busted?(players_hand)
     puts '(h)it or (s)tay?'
     answer = gets.chomp.downcase
 
-    newline
-    if answer == ('s' || 'stay') || busted?(players_hand)
+    if %w(s stay).include?(answer)
       break
-    elsif answer == 'h' || 'hit'
+    elsif %w(h hit).include?(answer)
+      puts 'Hit!'
       deal_card(players_hand)
     else
       puts "Try Again"
@@ -75,8 +72,7 @@ def user_turn(players_hand)
   end
 
   if busted?(players_hand)
-    puts "Busted. Dealer Wins!"
-    "Busted"
+    display_busted("Computer")
   else
     puts 'You chose to stay'
   end
@@ -84,22 +80,31 @@ end
 
 def dealer_turn(dealers_hand)
   loop do
-    puts "Dealer's hand is: #{show_hand(dealers_hand)}"
-    puts "Dealer's total is: #{total(dealers_hand)}"
-    newline
+    display_hand_and_total("Dealer", dealers_hand)
     break if total(dealers_hand) >= 17
     deal_card(dealers_hand)
   end
 
-  if busted?(dealers_hand)
-    newline
-    puts "Busted. Player Wins!!"
-    "Busted"
-  end
+  display_busted("Player") if busted?(dealers_hand)
+
+end
+
+display_hand_and_total(player, current_hand)
+  puts "=============================================="
+  puts "#{player}'s hand is: #{show_hand(current_hand)}"
+  puts "#{player}'s total is: #{total(current_hand)}"
+  puts "=============================================="
+  newline
 end
 
 def busted?(cards)
   total(cards) > 21
+end
+
+def display_busted(other_player)
+  newline
+  puts "Busted. #{other_player} wins!!"
+  "Busted"
 end
 
 def deal_card(to_hand)
@@ -127,7 +132,7 @@ def play_again?
   puts "-------------"
   puts "Do you want to play again? (y or n)"
   answer = gets.chomp.downcase
-  YES_NO.include?(answer)
+  %w(y yes).include?(answer)
 end
 
 def newline
@@ -148,9 +153,8 @@ loop do
     deal_card(dealers_hand)
   end
 
-  puts "Your hand is: #{show_hand(players_hand)}"
+  # puts "Your hand is: #{show_hand(players_hand)}"
   # puts "Your total is: #{total(players_hand)}"
-  newline
   puts "Dealer's hand is: #{show_hand(dealers_hand[0])} and [??]"
   newline
 
