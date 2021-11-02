@@ -86,10 +86,9 @@ def dealer_turn(dealers_hand)
   end
 
   display_busted("Player") if busted?(dealers_hand)
-
 end
 
-display_hand_and_total(player, current_hand)
+def display_hand_and_total(player, current_hand)
   puts "=============================================="
   puts "#{player}'s hand is: #{show_hand(current_hand)}"
   puts "#{player}'s total is: #{total(current_hand)}"
